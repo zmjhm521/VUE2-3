@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- v-model主要是针对含有value的元素 -->
+        <!-- 普通写法 -->
+        <!-- 数据只能从data流向页面 -->
+        <!-- 单向数据绑定<input type="text" v-bind:value="name"><hr> -->
+        <!-- 数据可以从data流向页面，也可以从页面流向data -->
+        <!-- 双向数据绑定<input type="text" v-model:value="name"><hr> -->
+        <!-- 简写 -->
+        单向数据绑定<input type="text" :value="name"><hr>
+        <!-- 数据可以从data流向页面，也可以从页面流向data -->
+        双向数据绑定<input type="text" v-model="name"><hr>
+        
+        <!-- 如下代码是错误的，因为v-model只能应用在表单类元素 -->
+        <h2 v-model:x="name">你好呀</h2>
+    
+    
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+            el: '#root',
+            data: {
+                name: '尚硅谷',
+            }
+        })    
+    </script>
+</body>
+
+</html>

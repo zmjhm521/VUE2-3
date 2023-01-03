@@ -1,0 +1,39 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <!-- 标签体中用插值语法
+        解析标签用指令语法 -->
+        <h1>插值语法</h1>
+        <h3>hello,{{name}}</h3>
+        <hr>
+        <h1>指令语法</h1>
+        <!-- url前加v-bind后就会被当作便令来用 -->
+        <!-- v-bind可以简写为冒号
+        不加的话为普通字符串，加的话为JS表达式 -->
+        <a v-bind:href="school.url">点我去{{school.name}}学习1</a>
+        <a :href="school.url">点我去{{school.name}}学习2</a>
+
+    </div>
+    
+    <script>
+        Vue.config.productionTip = false
+        new Vue({
+           el:'#root',
+           data:{
+            name:'jack',
+            school:{
+                 name:'尚硅谷',
+            url:'https://www.w3school.com.cn/html/html_css.asp'
+            }
+           }
+        })
+    </script>
+</body>
+</html>

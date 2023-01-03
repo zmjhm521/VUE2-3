@@ -1,0 +1,89 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 开发过程中最好使用每条数据的唯一标识作为key比如id、手机号、身份证号、学号等唯一值 -->
+        <!-- 遍历数组 -->
+        <button @click.once="add">添加一个老六</button>
+        <h2>人员列表</h2>
+        <input type="text" placeholder="请输入名字" v-model="keyword">
+        <ul>
+            <!-- 未设置key默认设置为index -->
+            <li v-for="(p,index) in filpersons" :key="p.id">
+                {{p.name}}-{{p.age}}-{{p.sex}}
+                <!-- <input type="text"> -->
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        //用watch实现
+        // new Vue({
+        //     el: '#root',
+        //     data: {
+        //         keyword: '',
+        //         persons: [
+        //             { id: '001', name: '马冬梅', age: 18, sex: '女' },
+        //             { id: '002', name: '周冬雨', age: 14, sex: '女' },
+        //             { id: '003', name: '周杰伦', age: 28, sex: '男' },
+        //             { id: '004', name: '温兆伦', age: 28, sex: '男' }
+        //         ],
+        //         filpersons: []
+        //     },
+        //     methods: {
+        //         add() {
+        //             const p = { id: '005', name: '老六', age: '34',sex:'男'}
+        //             this.filpersons.unshift(p)
+        //         }
+        //     },
+        //     watch: {
+        //         keyword: {
+        //             immediate:true,
+        //             handler(val) {
+        //                 this.filpersons = this.persons.filter((p) => {
+        //                     return p.name.indexOf(val) !== -1
+        //                 })
+        //             }
+        //         }
+        //     },
+        // })
+
+        //用计算属性实现
+        new Vue({
+            el: '#root',
+            data: {
+                keyword: '',
+                persons: [
+                    { id: '001', name: '马冬梅', age: 19, sex: '女' },
+                    { id: '002', name: '周冬雨', age: 20, sex: '女' },
+                    { id: '003', name: '周杰伦', age: 21, sex: '男' },
+                    { id: '004', name: '温兆伦', age: 22, sex: '男' }
+                ],
+            },
+            methods: {
+                add() {
+                    const p = { id: '005', name: '老六', age: '34', sex: '男' }
+                    this.filpersons.unshift(p)
+                }
+            },
+            computed: {
+                filpersons() {
+                    return this.filpersons = this.persons.filter((p) => {
+                        return p.name.indexOf(this.keyword) !== -1
+                    })
+                }
+            },
+        })
+
+    </script>
+</body>
+
+</html>

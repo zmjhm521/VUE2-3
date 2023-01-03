@@ -1,0 +1,40 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>初始</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <!-- Vue实例和容器是一一对应的
+    真是开发中只有一个vue实例，并且会配合着组件一起使用 -->
+
+    <!-- 注意区分js表达式 和js代码（语句）
+    表达式会生成一个值，可以放在任何一个需要值的地方
+        a a+b demo(1) x===y?'a':'b' 
+    js代码（语句）
+    if   for
+    -->
+    <div id="root">
+        <h1>Hello,{{name.toUpperCase()}},{{address}}</h1>
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false
+
+        //创建Vue实例 
+        new Vue({
+            el:'#root',//el用于指定当啊钱Vue实例为哪个容器服务，值通常为css选择器字符串
+            data:{//data中用于存储数据，数据供el所指定的容器去使用，值我们暂时先写成一个对象
+                name:'city',
+                address:'北京'
+            }
+        })
+    </script>
+</body>
+
+</html>

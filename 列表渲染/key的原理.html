@@ -1,0 +1,47 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <!-- 开发过程中最好使用每条数据的唯一标识作为key比如id、手机号、身份证号、学号等唯一值 -->
+        <!-- 遍历数组 -->
+        <button @click.once="add">添加一个老六</button>
+        <h2>人员列表</h2>
+        <ul>
+            <!-- 未设置key默认设置为index -->
+            <li v-for="(p,index) in persons" :key="p.id">
+                {{p.name}}-{{p.age}}
+                <input type="text">
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        new Vue({
+            el: '#root',
+            data: {
+                persons: [
+                    { id: '001', name: '张三', age: 18 },
+                    { id: '002', name: '李四', age: 14 },
+                    { id: '003', name: '王五', age: 28 }
+                ]
+            },
+            methods: {
+                add() {
+                    const p = { id: '004', name: '老六', age: '34' }
+                    this.persons.unshift(p)
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
