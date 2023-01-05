@@ -1,0 +1,81 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h1>学生信息</h1>
+        <button @click="students.age++">年龄加一</button><hr>
+        <button @click="addSex">加入性别,默认值是男</button><hr>
+        <button @click="addFriend">在列表首位添加一个朋友</button><hr>
+        <button @click="updateName">修改第一个朋友的名字为：张三</button><hr>
+        <button @click="addHobby">添加一个爱好</button><hr>
+        <button @click="updateHobby">修改第一个爱好为开车</button><hr>
+        <button @click="removeSmoke('抽烟')">过滤掉爱好中的抽烟</button><hr>
+        <h2>姓名{{students.name}}</h2>
+        <h2>年龄 {{students.age}}</h2>
+        <h2 v-if="students.sex">性别{{students.sex}}</h2>
+        <h2>朋友们</h2>
+        <ul>
+            <li v-for="(friend,index) in students.friedns" :key="index">
+                {{friend.name}}-{{friend.age}}
+            </li>
+        </ul>
+        <h2>爱好</h2>
+        <ul>
+            <li v-for="(h,index) in students.hobby" :key="index">
+                {{h}}
+            </li>
+        </ul>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el: '#root',
+            data: {
+                students: {
+                    name: 'tom',
+                    age: 18,
+                    hobby:['抽烟','喝酒','烫头'],
+                    friedns: [
+                        { name: 'jerry', age: 35 },
+                        { name: 'tony', age: 36 },
+                    ],
+                }
+            },
+            methods:{
+                addSex(){
+                    Vue.set(this.students,'sex','男')
+                },
+                addFriend(){
+                    this.students.friedns.unshift({ name: 'dog', age: 40 })
+                },
+                updateName(){
+                    this.students.friedns[0].name='张三'
+                },
+                addHobby(){
+                    this.students.hobby.push('学习')
+                },
+                updateHobby(){
+                    // Vue.set(this.students.hobby,0,'开车')
+                    // this.students.hobby.splice(0,1,'开车')
+                    this.$set(this.students.hobby,0,'开车')
+                },
+                removeSmoke(s){
+                    this.students.hobby= this.students.hobby.filter((h)=>{
+                        return h!==s
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
