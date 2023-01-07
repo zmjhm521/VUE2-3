@@ -1,0 +1,52 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+        <school></school>
+    </div>
+    <script>
+        Vue.config.productionTip = false
+        Vue.prototype.x = 99
+        // // 定义一个构造函数
+        // function Demo(){
+        //     this.a=1
+        //     this.b=2
+        // }
+        // const d = new Demo()
+        // console.log(Demo.prototype);//显式原型属性
+        // console.log(d.__proto__);//隐式原型属性
+// 一个重要的内置关系:VueComponent.prototype.__proto__=Vue.prototype
+// 组件实例独享vc可以访问到Vue原型上的属性和方法
+        // // 程序员通过显式原型属性操作原型对象,追加一个x属性,值为99
+        // Demo.prototype.x=99
+            const school = Vue.extend({
+                template:`
+                <div>
+                <h2>{{msg}}</h2>
+                <button @click="showX"></button>
+                </div>`,
+                data(){
+                    return {msg:"赵明杰"}
+                },
+                methods:{
+                    showX(){
+                        console.log(this.x);
+                    }
+                }
+            })
+        // console.log(school.x);
+                new Vue({
+                    el:'#root',
+                    components:{
+                        school
+                    }
+                })
+    </script>
+</body>
+</html>

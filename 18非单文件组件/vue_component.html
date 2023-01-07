@@ -1,0 +1,56 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <school></school>
+
+    </div>
+
+    <script>
+        Vue.config.productionTip = false
+  
+        // 创建school组件
+        const school = {
+            // el:'#root',//组件定义是一定不要写el配置项，因为最终所有的组件都要被一个vm管理，由vm决定服务于哪个容器。
+            template: `
+            <div>        
+            <h1>学校名称：{{schoolName}}</h1>
+            <h1>学校地址：{{address}}</h1> 
+            <button @click="showName">点我显示学校名</button>
+            </div>`,
+            data() {
+                return {
+                    schoolName: '尚硅谷',
+                    address: '北京',
+                }
+            },
+            methods:{
+                showName(){
+                    console.log(this);
+                    alert(this.schoolName)
+                }
+            }
+    
+        }
+
+   
+        // 创建vm
+        const vm = new Vue({
+            el: '#root',
+            // 注册组件（局部注册）
+            components: {
+                school,
+            }
+        })
+    </script>
+</body>
+
+</html>
