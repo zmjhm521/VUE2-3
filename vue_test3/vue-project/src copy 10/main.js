@@ -6,7 +6,9 @@ Vue.config.productionTip = false
 new Vue({
     el: '#app',
     render: h => h(App),
-    beforeCreate(){
-        Vue.prototype.$bus = this
-    }
+    // mounted(){
+    //     setTimeout(() => {
+    //         this.$destroy()
+    //     }, 3000);
+    // }
 })

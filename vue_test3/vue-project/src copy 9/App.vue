@@ -2,20 +2,21 @@
   <div id="root">
   <div class="todo-container">
     <div class="todo-wrap">
-      <MyHeader @addTodo="addTodo"></MyHeader>
-      <List :todos="todos" >
+      <MyHeader :addTodo="addTodo"></MyHeader>
+      <List 
+        :todos="todos" 
+        :checkTodo="checkTodo"
+        :shanchu="shanchu"
+        >
       </List>
-      <MyFooter 
-      :todos="todos" 
-      @quanxuan="quanxuan" 
-      @qingchuwancheng="qingchuwancheng"></MyFooter>
+      <MyFooter :todos="todos" :quanxuan="quanxuan" :qingchuwancheng="qingchuwancheng"></MyFooter>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import pubsub from 'pubsub-js';
+// 引入Student组件
 import MyHeader from './components/MyHeader.vue';
 import List from './components/List.vue';
 import MyFooter from './components/MyFooter.vue';
@@ -40,7 +41,7 @@ export default {
           if(todo.id === id) todo.done = !todo.done
         })
       },
-      shanchu(_,id){
+      shanchu(id){
         this.todos=this.todos.filter((todo)=>{
           return todo.id !== id
         })
@@ -54,11 +55,6 @@ export default {
         this.todos=this.todos.filter((todo)=>{
           return !todo.done
         })
-      },
-      updateTodo(id,title){
-        this.todos.forEach((todo)=>{
-          if(todo.id === id) todo.title = title
-        })
       }
     },
     watch:{
@@ -69,18 +65,6 @@ export default {
           localStorage.setItem('todos',JSON.stringify(value))
         }
       }
-    },
-    mounted(){
-      this.$bus.$on('checkTodo',this.checkTodo)
-      this.$bus.$on('updateTodo',this.updateTodo)
-      // this.$bus.$on('shanchu',this.shanchu)
-      this.pubId = pubsub.subscribe('shanchu',this.shanchu)
-    },
-    beforeDestroy(){
-      this.$bus.$off('checkTodo')
-      this.$bus.$off('updateTodo')
-      // this.$bus.$off('shanchu')
-      pubsub.unsubscribe(this.pubId)
     }
 }
 </script>
@@ -107,13 +91,6 @@ export default {
     color: #fff;
     background-color: #da4f49;
     border: 1px solid #bd362f;
-  }
-
-  .btn-edit {
-    color: #fff;
-    background-color: skyblue;
-    border: 1px solid rgb(107, 205, 243);
-    margin-right: 10px;
   }
 
   .btn-danger:hover {

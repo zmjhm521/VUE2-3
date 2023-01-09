@@ -7,64 +7,32 @@
                 type="checkbox" 
                 :checked="todo.done" 
                 @click="handleCheck(todo.id)"
-
             />
             <!-- v-model中不要修改prop传过来的值 -->
             <!-- <input type="checkbox"
                 v-model="todo.done"> -->
-            <span v-show="!todo.isEdit">{{ todo.title }}</span>
-            <input 
-                v-show="todo.isEdit" 
-                type="text" 
-                :value="todo.title" 
-                @blur="handleBlur(todo,$event)"
-                ref="inputTitle">
+            <span>{{ todo.title }}</span>
         </label>
         <button class="btn btn-danger" @click="remove(todo.id)">删除</button>
-        <button v-show="!todo.isEdit" class="btn btn-edit" @click="HandleEdit(todo)">编辑</button>
     </li>
 </template>
 
 <script>
-import pubsub from 'pubsub-js';
 export default {
     name: 'Item',
     // 声明接受todo对象
-    props:['todo'],
+    props:['todo','checkTodo','shanchu'],
     methods:{
         // 勾选
         handleCheck(id){
             // 通知App组件将对应的todo对象的done值取反
-            this.$bus.$emit('checkTodo',id)
+            this.checkTodo(id)
         },
         // 删除
         remove(id){
             if(confirm('确认取消吗')){
-                // this.$bus.$emit('shanchu',id)
-                pubsub.publish('shanchu',id)
+                this.shanchu(id)
             }
-        },
-        //编辑
-        HandleEdit(todo){
-            if(todo.hasOwnProperty('isEdit')){
-                todo.isEdit = true
-            } else{
-                this.$set(todo,todo.isEdit = true)
-            }
-            // 在下一次DOM更新后执行指定的回调
-            // this.$nextTick(()=>{
-            //     this.$refs.inputTitle.focus()
-            // })
-            setTimeout(() => {
-                this.$refs.inputTitle.focus()
-            }, );
-        },
-        // 失去焦点回调（真正执行修改逻辑）
-        handleBlur(todo,e){
-            todo.isEdit = false
-            // console.log(e.target.value);
-            if(!e.target.value.trim()) return alert('输入不能为空')
-            this.$bus.$emit('updateTodo',todo.id,e.target.value)
         }
     }
 }

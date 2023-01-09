@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "nanoid": "^4.0.0",
+    "pubsub-js": "^1.9.4",
     "vue": "^2.7.7"
   },
   "devDependencies": {

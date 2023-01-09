@@ -15,7 +15,7 @@
 <script>
 export default {
   name: 'MyFooter',
-  props: ['todos'],
+  props: ['todos', 'quanxuan','qingchuwancheng'],
   computed: {
     finished: function () {
       // return this.todos.reduce((pre,current)=>{
@@ -29,7 +29,7 @@ export default {
         return this.finished === this.todos.length && this.todos.length > 0
       },
       set(value) {
-        this.$emit('quanxuan',value)
+        this.quanxuan(value)
       }
     }
   },
@@ -41,7 +41,7 @@ export default {
   methods:{
     removeFinish(){
       if(confirm('确认取消吗')){
-      this.$emit('qingchuwancheng')
+      this.qingchuwancheng()
       }
     }
   }

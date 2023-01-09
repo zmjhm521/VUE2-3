@@ -13,6 +13,7 @@ export default {
             title:''
         }
     },
+    props:['addTodo'],
     methods:{
         add(e){
             // 校验数据
@@ -21,7 +22,7 @@ export default {
             const todoObj = { id:nanoid(),title:e.target.value,done:false}
             // console.log(todoObj);
             // 通知App组件去添加一个todo对象
-            this.$emit('addTodo',todoObj)
+            this.addTodo(todoObj)
             // 清空输入
             this.title = ''
         }

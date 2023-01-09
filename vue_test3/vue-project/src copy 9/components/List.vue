@@ -4,6 +4,8 @@
           v-for="todoObj in todos" 
           :key="todoObj.id" 
           :todo="todoObj" 
+          :checkTodo="checkTodo"
+          :shanchu="shanchu"
           >
         </Item> 
     </ul>
@@ -14,7 +16,7 @@ import Item from './Item.vue';
 export default {
     name: 'List',
     components: { Item },
-    props:['todos']
+    props:['todos','checkTodo','shanchu']
 }
 </script>
 
