@@ -31,7 +31,7 @@ export default {
         }
     },
     mounted() {
-        pubsub.subscribe('updateListData',(msgName, dataObj) => {
+        pubsub.subscribe('updateListData', (dataObj) => {
             console.log(dataObj);
             this.info = {...this.info,...dataObj}
         })
