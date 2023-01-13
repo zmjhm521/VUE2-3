@@ -11,7 +11,6 @@
           <a class="list-group-item active" href="./home.html">Home</a> -->
         
           <!-- 原始HTML中我们使用a标签实现页面的跳转 -->
-          <!-- router-link默认是push模式为追加历史记录，replace是替换当前记录 -->
           <router-link class="list-group-item" active-class="active" to="/about">About</router-link>
           <router-link class="list-group-item" active-class="active" to="/home">Home</router-link>
         </div>
