@@ -1,25 +1,21 @@
 <script setup>
-import {  reactive, readonly, ref,isProxy,isRef,isReactive,isReadonly } from 'vue';
-let sum = ref(0)
-let car = reactive({
-    name:'奔驰',
-    price:'40w'
-})
-let car2 = readonly(car)
-
-console.log(isRef(sum));
-console.log(isReactive(car));
-console.log(isReadonly(car2));
-console.log(isProxy(car2));
-console.log(isProxy(sum));
-
-
+// import Clid from './components/Clid.vue'
+import { defineAsyncComponent } from 'vue';//静态引入
+const Clid = defineAsyncComponent(()=>import('./components/Clid.vue'))//异步引入
 
 </script>
 
 <template>
     <div class="app">
         <h3>我是APP组件（组）</h3>
+        <Suspense>
+            <template #default>
+                <Clid></Clid>
+            </template>
+            <template #fallback>
+                <h3>稍等加载中...</h3>
+            </template>
+        </Suspense>
     </div>
 </template>
 
